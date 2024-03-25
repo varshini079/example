@@ -1,0 +1,141 @@
+<!-- views/index.ejs -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link  type=text/css href="/public/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="todo-form">
+            <div class="todo-item">
+                <h2 class="heading">TODOLIST </h2>
+                <div class="row">
+                    <input type="text" id="todo-text" placeholder="Add todo">
+                    <select id="dropdown" onchange="handleDropdownChange()">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="personal">Personal </option>
+                        <option value="home">Home</option>
+                        <option value="__new_option__">Add New Option</option>
+                    </select>
+                </div>
+
+                <div id="newOptionDialog">
+                    <div class="modal-content">
+                        <input type="text" id="newOptionText" placeholder="Enter new option">
+                        <br><br>
+                        <button onclick="addNewOption()">Add Option</button>
+                        <button onclick="closeDialog()">Cancel</button>
+                    </div>
+                </div>
+                <button id="add-todo" onclick="add()">Add</button>
+            </div>
+        </div>
+
+        <div class="section">
+            <% personalTodos.forEach(todo => { %>
+                <div class="app" id="<%= todo.category %>">
+                    <h2><%= todo.category %><img src="image.jpg"></h2>
+                    <ul>
+                        <li><%= todo.text %></li>
+                    </ul>
+                </div>
+            <% }) %>
+
+            <% homeTodos.forEach(todo => { %>
+                <div class="app" id="<%= todo.category %>">
+                    <h2><%= todo.category %><img src="image.jpg"></h2>
+                    <ul>
+                        <li><%= todo.text %></li>
+                    </ul>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+<script >
+        function add() {
+    console.log("h");
+    var taskInput = document.getElementById("todo-text");
+    var categorySelect = document.getElementById("dropdown");
+    var taskText = taskInput.value.trim();
+    var category = categorySelect.value;
+
+    if (taskText !== "") {
+        addTask(taskText, category);
+        taskInput.value = "";
+    }
+    else{
+        alert("Please enter a valid task!");
+    
+    }
+}
+
+// Add event listener to the dropdown
+function handleDropdownChange() {
+    var selectElement = document.getElementById("dropdown");
+    var selectedOption = selectElement.value;
+    
+    if (selectedOption === "__new_option__") {
+        document.getElementById("newOptionDialog").style.display = "block";
+    }
+}
+function addNewOption() {
+    var selectElement = document.getElementById("dropdown");
+    var newOptionText = document.getElementById("newOptionText").value.trim();
+    
+    // Check if the input field is not empty
+    if (newOptionText !== "") {
+        // Check if the new option already exists
+        if (!selectElement.querySelector("option[value='" + newOptionText + "']")) {
+            var newOption = document.createElement("option");
+            newOption.text = newOptionText;
+            newOption.value = newOptionText;
+            selectElement.add(newOption);
+            
+            // Select the newly added option
+            newOption.selected = true;
+
+            // Add a new div corresponding to the new option
+            addNewDiv(newOptionText);
+
+            // Close the dialog
+            closeDialog();
+        } else {
+            alert("Option already exists!");
+        }
+    } else {
+        alert("Please enter a valid option!");
+    }
+}
+
+
+
+
+function closeDialog() {
+    document.getElementById("newOptionDialog").style.display = "none";
+    document.getElementById("newOptionText").value = "";
+}
+//addTask function form new folder
+function addNewDiv(categoryName, callback) {
+    var divId = categoryName.toLowerCase();
+    // Check if a div with the same ID already exists
+    if (!document.getElementById(divId)) {
+        // If not, create a new div for the category
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('app');
+        newDiv.id = divId;
+        newDiv.innerHTML = `
+            <h2>${categoryName}<img src="image.jpg"></h2>
+        `;
+        document.querySelector('.section').appendChild(newDiv);
+        // Execute the callback if provided
+        if (typeof callback === 'function') {
+            callback();
+        }
+    }
+}
+ </script>
+</body>
+</html>
