@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do List</title>
+    <link  type="text/css" rel="stylesheet" href="/views/styles.css" >
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="logo.png" alt="Logo">
+        </div>
+        <nav>
+            <ul>
+                <a  onclick="goToPage1()">Home</a>
+                <a  onclick="goToPage2()">Events</a>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="todo-form">
+            <div class="todo-item">
+                <h2 class="heading">TO DO LIST</h2>
+                <div class="row">
+                    <input type="text" id="todo-text" placeholder="Add todo" name="task">
+                    <select id="dropdown" onchange="handleDropdownChange()">
+                        <option value="" disabled selected>Select an option</option>
+                        <option value="__new_option__">Add New Option</option>
+                        <option value="personal">Personal </option>
+                        <option value="home">Home</option>
+                        <% options.forEach(option => { %>
+                            <option value="<%= option._id %>"><%= option.name %></option>
+                          <% }); %>
+                     
+                    </select>
+                </div>
+                <div id="newOptionDialog">
+                    <div class="modal-content">
+                        <input type="text" id="newOptionText" name="name" placeholder="Enter new option">
+                        <br><br>
+                        <button onclick="addNewOption()">Add Option</button>
+                        <button onclick="closeDialog()">Cancel</button>
+                    </div>
+                </div>
+                <button id="add-todo" onclick="add()">Add</button>
+            </div>
+        </div>
+        <div id="tasks-container"></div>
+        <div class="section">
+            <div class="app" id="personal">
+                <h2>Personal <img src="image.jpg"></h2>
+                <ul>
+                    <% tasksByCategory.forEach(category => { %>
+                        <% if (category._id === 'personal') { %>
+                            <% if (category.tasks && category.tasks.length > 0) { %>
+                                <% category.tasks.forEach(task => { %>
+                                    <li><%= task.task %></li>
+                                <% }); %>
+                            <% } else { %>
+                                <li>No tasks found for this category</li>
+                            <% } %>
+                        <% } %>
+                    <% }); %>
+                </ul>
+            </div>
+             
+            <div class="app" id="home">
+
+                <h2>Home <img src="img.jpg"></h2>
+                    <ul>
+                        <% tasksByCategory.forEach(category => { %>
+                            <% if (category._id === 'home') { %>
+                                <% if (category.tasks && category.tasks.length > 0) { %>
+                                    <% category.tasks.forEach(task => { %>
+                                        <li><%= task.task %></li>
+                                    <% }); %>
+                                <% } else { %>
+                                    <li>No tasks found for this category</li>
+                                <% } %>
+                            <% } %>
+                        <% }); %>
+                    </ul>
+                </div>
+                 
+            </div>
+
+                    <% tasksByCategory.forEach(category => { %>
+                        <% if (category._id !== 'personal' && category._id !== 'home') { %>
+                            
+                            <div class="app" id="<%= category._id%>">
+                                <h2><%= category %> <img src="image.jpg"></h2>
+                                <ul>
+                                    <% if (category.tasks && category.tasks.length > 0) { %>
+                                        <% category.tasks.forEach(task => { %>
+                                            <li><%= task.task %></li>
+                                        <% }); %>
+                                    <% } else { %>
+                                        <li>No tasks found for this category</li>
+                                     <% } %>
+                                </ul>
+                            </div>
+                        <% } %>
+                    <% }); %>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+<script src="/views/script.js">
+ 
+</script>
+</body>
+</html>

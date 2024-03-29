@@ -1,0 +1,254 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Header Styles */
+.logo img {
+    max-width: 90px;
+}
+
+header {
+    background-color: #fff;
+    color: #333;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: space-between;
+}
+nav a {
+    color: #333;
+    font-weight: bolder;
+    font-size: large;
+    padding-right: 20px;
+}
+.heading {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* Main Container Styles */
+.container {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #64a2d1, #a7b7c3);
+    padding: 10px;
+}
+
+/* To-Do Form Styles */
+.todo-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.todo-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #fff;
+    border-radius: 30px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#todo-text {
+    border: none;
+    outline: none;
+    background: transparent;
+    font-size: 16px;
+    padding: 10px;
+    flex: 1;
+}
+
+select {
+    padding: 5px;
+    font-size: 16px;
+    margin-left: 10px;
+}
+/*button styles*/
+#add-todo {
+    border: none;
+    outline: none;
+    background: #ff5945;
+    border-radius: 40px;
+    cursor: pointer;
+    color: #fff;
+    padding: 16px 50px;
+    font-size: 16px;
+    margin-top: 1px;
+}
+
+#add-todo:hover {
+    background: #ff7159;
+}
+/* Modal Dialog Styles */
+#newOptionDialog {
+    display: none;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    padding-top: 100px;
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 400px;
+    text-align: center;
+}
+
+#newOptionInput {
+    margin-top: 10px;
+}
+
+/* Task App Styles */
+.section {
+    color: black;
+    text-align: center;
+    display: flex;
+    justify-content: space-around; /* Adjust spacing between items */
+    align-items: center;
+    flex-direction: row; /* Arrange items horizontally */
+    margin-top: 40px;
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
+    height:fit-content;
+}
+
+.app {
+    width: calc(50% - 10px); /* Two divs per row (subtracting margins) */
+
+    max-width: 540px; /* Adjust based on your preference */
+    background: white;
+    margin-bottom: 20px;
+    padding: 40px 30px 70px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+.app h2 {
+    color: #002765;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.app img {
+    width: 30px;
+    margin-left: 10px;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #fff;
+    border-radius: 30px;
+    padding-left: 20px;
+    margin-bottom: 20px;
+}
+
+/* Task List Styles */
+ul li {
+    list-style: none;
+    font-size: 20px;
+    padding: 10px 8px 10px 50px;
+    user-select: none;
+    cursor: pointer;
+    position: relative;
+}
+
+ul li::before {
+    content: '';
+    position: absolute;
+    height: 28px;
+    width: 28px;
+    border-radius: 10%;
+    background-image: url(uncheckedbox.png);
+    background-size: cover;
+    background-position: center;
+    top: 10px;
+    left: 10px;
+}
+
+ul li.checked {
+    color: #555;
+    text-decoration: line-through;
+}
+
+ul li.checked::before {
+    background-image: url(tick.jpg);
+}
+
+ul li span {
+    position: absolute;
+    top: 0px;
+    bottom: 2px;
+    right: 10px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 22px;
+    color: #555;
+    line-height: 40px;
+    text-align: center;
+}
+
+ul li span:hover {
+    color: black;
+    background: #edeef0;
+}
+
+/* New Category Section Styles */
+.new-category {
+    background: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.new-category h2 {
+    color: #002765;
+    margin-bottom: 10px;
+}
+
+.new-category input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+#addCategoryBtn {
+    border: none;
+    outline: none;
+    background: #002765;
+    border-radius: 5px;
+    cursor: pointer;
+    color: #fff;
+}
